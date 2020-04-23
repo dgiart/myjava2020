@@ -2,29 +2,29 @@ import java.util.*;
 
 
 public class Digits23_04epam {
-//    static int len(int N){
-//        return (int)Math.log10(N)+1;
-//    }
-//    //converts int number to the array of digits
-//    static int[] digits(int N){
-//        int numdig=len(N);//number of digits
-//        int num=N;
-//        int[] dgs=new int[numdig];
-//        for (int i = 0; i <dgs.length ; i++) {
-//            dgs[i]=N%10;
-//            N=N/10;
-//
-//        }
-//        return dgs;
-//    }
+    static int len(int N){
+        return (int)Math.log10(N)+1;
+    }
+    //converts int number to the array of digits
+    static int[] digits(int N){
+        int numdig=len(N);//number of digits
+        int num=N;
+        int[] dgs=new int[numdig];
+        for (int i = 0; i <dgs.length ; i++) {
+            dgs[i]=N%10;
+            N=N/10;
+
+        }
+        return dgs;
+    }
 //    //converts String array to int array
-//    static Integer[] strtoint(String[]st){
-//        Integer[] nums=new Integer[st.length];
-//        for (int i = 0; i <st.length ; i++) {
-//            nums[i]=Integer.parseInt(st[i]);
-//        }
-//        return nums;
-//    }
+    static Integer[] strtoint(String[]st){
+        Integer[] nums=new Integer[st.length];
+        for (int i = 0; i <st.length ; i++) {
+            nums[i]=Integer.parseInt(st[i]);
+        }
+        return nums;
+    }
 //    //check array of digits for digits coincidence
 //    static boolean iscoincidence(int[] arr){
 //        for (int i = 0; i <arr.length ; i++) {
@@ -65,8 +65,12 @@ public class Digits23_04epam {
 //        return maxpair;
 //    }
     public static void main(String[] args) {
+
         System.out.println("HOP-HOP");
-//        Integer []nms=strtoint(args);
+        Integer []nms=strtoint(args);
+        System.out.println(Arrays.toString(nms));
+        Arrays.sort(nms);
+        System.out.println(Arrays.toString(nms));
 //        for (int n:nms ) {
 //            System.out.println(len(n)+"\t"+n);
 //        }
