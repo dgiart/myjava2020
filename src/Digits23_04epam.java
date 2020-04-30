@@ -2,6 +2,8 @@ import java.util.*;
 
 
 public class Digits23_04epam {
+
+
     static int len(int N){
         return (int)Math.log10(N)+1;
     }
