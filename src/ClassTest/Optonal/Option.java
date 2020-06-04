@@ -48,11 +48,21 @@ public class Option {
 //        for (int i = 0; i <5 ; i++) {
 //            Optional<Order>opt=ords.stream().filter(oo->oo.id%2==0).findAny();
 //            System.out.println(opt);
-        Optional<Order> optOrd=findByIdOpt(30, ords);
+        Optional<Order> optOrd=findByIdOpt(12, ords);
+
         //
         if (optOrd.isPresent()){
             System.out.println(optOrd.get());
         }
-
+        Order op1=findByIdOpt(123,ords).orElse(new Order(111,111.));
+        Order op2=optOrd.orElse(new Order(111,111.));
+//        Optional<Integer>i=Optional.empty();
+//        Optional<Integer>j=Optional.ofNullable(null);
+//        System.out.println("j="+j.get());
+        pprint(ords);
+        System.out.println("\nWith val < 300");
+        ords.stream().filter(o->o.value<300).forEach(System.out::println);
+        System.out.println("op2: "+op1);
+        System.out.println("op2: "+op2);
     }
 }
