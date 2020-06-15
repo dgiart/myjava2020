@@ -13,5 +13,6 @@ public class CallMain {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        service.shutdown();
     }
 }
