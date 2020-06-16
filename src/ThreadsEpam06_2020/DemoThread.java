@@ -9,14 +9,15 @@ public class DemoThread {
 //        firstThread.
 //        new Object().
         Thread talk=new Thread(new TalkThread());
+        talk.setDaemon(true);
         talk.start();
-        for (int i = 0; i <5 ; i++) {
-            System.out.println("IN MAIN "+i);
-            try {
-                TimeUnit.MILLISECONDS.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//        for (int i = 0; i <5 ; i++) {
+//            System.out.println("IN MAIN "+i);
+//            try {
+//                TimeUnit.MILLISECONDS.sleep(1);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 }
