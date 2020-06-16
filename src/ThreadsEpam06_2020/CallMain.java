@@ -8,11 +8,15 @@ public class CallMain {
         Future<String> future=service.submit(new CallThread());
         try {
             String result=future.get();
+            service.shutdownNow();
+            System.out.println("result="+result);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        service.shutdown();
+
+        service.shutdownNow();
+
     }
 }

@@ -11,7 +11,7 @@ public class CallThread implements Callable<String>{
             System.out.println("Call"+i);
             builder.append("Call"+i);
             try {
-                TimeUnit.MILLISECONDS.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

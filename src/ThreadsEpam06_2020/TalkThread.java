@@ -5,10 +5,10 @@ import java.util.concurrent.TimeUnit;
 public class TalkThread implements Runnable{
     @Override
     public void run() {
-        for (int i = 0; i <5 ; i++) {
-            System.out.println("Running IMPLEMENTED"+i);
+        for (int i = 0; i <50 ; i++) {
+            System.out.println("Running  TALK"+i);
             try {
-                TimeUnit.MILLISECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
