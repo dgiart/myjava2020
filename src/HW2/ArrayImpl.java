@@ -37,37 +37,62 @@ public class ArrayImpl implements Array {
 
     @Override
     public void add(Object element) {
-        Object[]newarr=new Object[arr.length+1];
-        for (int i = 0; i <arr.length ; i++) {
+        Object[] newarr = new Object[arr.length + 1];
+        for (int i = 0; i < arr.length ; i++) {
             newarr[i] = arr[i];
         }
-        newarr[arr.length]=element;
+        newarr[arr.length] = element;
         arr=newarr;
     }
 
     @Override
     public void set(int index, Object element) {
-        if(index<arr.length){
-            arr[index]=element;
+        if(index<arr.length && index >= 0){
+            arr[index] = element;
         }
         else {
-            System.out.println("indexOutOfRange");
+            System.out.print("indexOutOfRange: [" + 0 + ".." + (arr.length - 1) + "]");
         }
     }
 
     @Override
     public Object get(int index) {
-        return null;
+        if (index < arr.length && index >= 0){
+            return arr[index];
+        }
+        else{
+            System.out.print("indexOutOfRange: ["+ 0 + ".." + (arr.length - 1) + "]");
+            return null;
+        }
+
     }
 
     @Override
     public int indexOf(Object element) {
-        return 0;
+        for (int i = 0; i <arr.length ; i++) {
+            if(element.equals(arr[i])){
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public void remove(int index) {
-
+        if (index < arr.length && index >= 0){
+            Object [] newarr = new Object [arr.length-1];
+            int newarri=0;
+            for (int i = 0; i < arr.length; i++) {
+                if(i != index){
+                    newarr[newarri] = arr[i];
+                    newarri ++;
+                }
+            }
+            arr=newarr;
+        }
+        else {
+            System.out.print("indexOutOfRange: ["+ 0 + ".." + (arr.length - 1) + "]");
+        }
     }
 
     @Override
@@ -89,14 +114,17 @@ public class ArrayImpl implements Array {
         a.add("A");
         a.add("B");
         a.add("C");
-        System.out.println(a.size());
+//        System.out.println(a.size());
         System.out.println(a.toString());
         a.set(1,"XXX");
         System.out.println(a.toString());
         a.set(5,"");
-        a.clear();
-        System.out.println(a.size());
-
+//        a.clear();
+//        System.out.println(a.size());
+        System.out.println("index of C ="+a.indexOf("C"));
+        System.out.println(a.get(0));
+        a.remove(0);
+        System.out.println(a.toString());
         System.out.println("END");
     }
 

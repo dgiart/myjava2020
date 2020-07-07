@@ -29,12 +29,13 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        System.out.println("START");
-        Test t=new Test();
-        t.add("A");
-        t.add("B");
-        t.add("C");
-        System.out.println(t.size());
-        System.out.println(t.toString());
+//        System.out.println("START");
+//        Test t=new Test();
+//        t.add("A");
+//        t.add("B");
+//        t.add("C");
+//        System.out.println(t.size());
+//        System.out.println(t.toString());
+        System.out.println("C".equals("C"));
     }
 }
