@@ -4,16 +4,27 @@ package HW2;
 import java.util.Iterator;
 
 public class ArrayImpl implements Array {
-    Object[]arr=new Object[0];
+    Object[]arr;
+    int size;
+    int defoultSize=10;
+    public ArrayImpl(){
+        size=0;
+        arr=new Object[defoultSize];
+    }
+
+    public ArrayImpl(int s){
+        size=0;
+        arr=new Object[s];
+    }
 
     @Override
     public void clear() {
-        this.arr=new Object[0];
+        this.arr=new Object[0] ;
     }
 
     @Override
     public int size() {
-        return arr.length;
+        return this.size;
     }
 
     @Override
@@ -37,31 +48,33 @@ public class ArrayImpl implements Array {
 
     @Override
     public void add(Object element) {
-        Object[] newarr = new Object[arr.length + 1];
-        for (int i = 0; i < arr.length ; i++) {
-            newarr[i] = arr[i];
+        if (size == arr.length - 1){
+            Object[] newarr = new Object[arr.length * 2];
+            System.arraycopy(arr,0,newarr,0,arr.length);
+            arr=newarr;
         }
-        newarr[arr.length] = element;
-        arr=newarr;
+
+        arr[size] = element;
+        size++;
     }
 
     @Override
     public void set(int index, Object element) {
-        if(index<arr.length && index >= 0){
+        if(index<size && index >= 0){
             arr[index] = element;
         }
         else {
-            System.out.print("indexOutOfRange: [" + 0 + ".." + (arr.length - 1) + "]");
+            System.out.print("indexOutOfRange: [" + 0 + ".." + (size) + "]");
         }
     }
 
     @Override
     public Object get(int index) {
-        if (index < arr.length && index >= 0){
+        if (index < size && index >= 0){
             return arr[index];
         }
         else{
-            System.out.print("indexOutOfRange: ["+ 0 + ".." + (arr.length - 1) + "]");
+            System.out.print("indexOutOfRange: ["+ 0 + ".." + (size) + "]");
             return null;
         }
 
@@ -69,26 +82,27 @@ public class ArrayImpl implements Array {
 
     @Override
     public int indexOf(Object element) {
-        for (int i = 0; i <arr.length ; i++) {
-            if(element.equals(arr[i])){
-                return i;
-            }
+        if (element == null) {
+            for (int i = 0; i < size; i++)
+                if (arr[i] == null)
+                    return i;
+        } else {
+            for (int i = 0; i < size; i++)
+                if (element.equals(arr[i]))
+                    return i;
         }
         return -1;
     }
 
     @Override
     public void remove(int index) {
-        if (index < arr.length && index >= 0){
-            Object [] newarr = new Object [arr.length-1];
-            int newarri=0;
-            for (int i = 0; i < arr.length; i++) {
-                if(i != index){
-                    newarr[newarri] = arr[i];
-                    newarri ++;
-                }
-            }
-            arr=newarr;
+        if (index < size && index >= 0){
+            int move = size - index - 1;
+            if (move > 0)
+                System.arraycopy(arr, index+1, arr, index,
+                        move);
+            arr[--size] = null;
+
         }
         else {
             System.out.print("indexOutOfRange: ["+ 0 + ".." + (arr.length - 1) + "]");
@@ -100,8 +114,8 @@ public class ArrayImpl implements Array {
         StringBuilder b=new StringBuilder();
         b.append("[");
         for (int i = 0; ; i++) {
-            b.append(arr[i].toString());
-            if (i==arr.length-1){
+            b.append(String.valueOf(arr[i]));
+            if (i==size){
                 return b.append("]").toString();
             }
             b.append(",");
@@ -109,23 +123,27 @@ public class ArrayImpl implements Array {
     }
 
     public static void main(String[] args) {
-        System.out.println("START");
-        ArrayImpl a=new ArrayImpl();
+        System.out.print("START");
+        ArrayImpl a = new ArrayImpl();
         a.add("A");
         a.add("B");
         a.add("C");
-//        System.out.println(a.size());
-        System.out.println(a.toString());
-        a.set(1,"XXX");
-        System.out.println(a.toString());
-        a.set(5,"");
-//        a.clear();
-//        System.out.println(a.size());
-        System.out.println("index of C ="+a.indexOf("C"));
-        System.out.println(a.get(0));
-        a.remove(0);
-        System.out.println(a.toString());
-        System.out.println("END");
+//        System.out.println(a.arr[0]);
+        System.out.print(a.toString());
+        System.out.print(a.size());
+//        a.set(1,"XXX");
+//        System.out.print(a.toString());
+//        a.set(5,"");
+//        System.out.print("index of C ="+a.indexOf("C"));
+//        System.out.print(a.get(0));
+//        System.out.print("size before rem="+a.size());
+////
+//        a.remove(0);
+//        System.out.print("size after rem="+a.size());
+//        System.out.print(a.toString());
+//        System.out.print("END");
+//        Object o=null;
+//
     }
 
 }
