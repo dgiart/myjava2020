@@ -37,4 +37,7 @@ public class Base {
                 ", name='" + name + '\'' +
                 '}';
     }
+    public void foo(){
+        System.out.println("BASE foo");
+    }
 }

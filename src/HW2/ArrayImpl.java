@@ -131,8 +131,8 @@ public class ArrayImpl implements Array {
 //        System.out.println(a.arr[0]);
         System.out.print(a.toString());
         System.out.print(a.size());
-//        a.set(1,"XXX");
-//        System.out.print(a.toString());
+        a.set(1,"XXX");
+        System.out.print(a.toString());
 //        a.set(5,"");
 //        System.out.print("index of C ="+a.indexOf("C"));
 //        System.out.print(a.get(0));

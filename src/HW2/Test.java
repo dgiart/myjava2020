@@ -4,6 +4,7 @@ package HW2;
 import java.sql.Array;
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Test {
     Object[]arr=new Object[0];
@@ -33,13 +34,16 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        Long ten=10L;
-        Long ten2=10L;
-        ten++;
-        ten2++;
+        Locale l=Locale.getDefault();
+        System.out.println(l);
+//        Long ten=10L;
+//        Long ten2=10L;
+//        ten++;
+//        ten2++;
+//        null.
 //        five++;
 //        five2++;
-        System.out.println(ten == ten2);
+//        System.out.println(ten == ten2);
 
 //        Integer i = new Integer(10);
 //        i++;

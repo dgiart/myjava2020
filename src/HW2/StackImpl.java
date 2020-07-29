@@ -3,16 +3,34 @@ package HW2;
 import java.util.Iterator;
 
 public class StackImpl implements Stack {
-    Object[]arr=new Object[0];
+    Node tail;
+    Node head;
+    int size;
+
+    public class Node {
+        Object value;
+        Node next;
+    }
+
 
     @Override
     public void clear() {
-        this.arr=new Object[0];
+       Node current = head;
+        while (current != tail){
+            Node temp = current;
+            System.out.println(current.value);
+            current.value = 0;
+            current = null;
+            current = temp.next;
+        }
+
+        size = 0;
+        tail = head = null;
     }
 
     @Override
     public int size() {
-        return arr.length;
+        return size;
     }
 
     public Iterator<Object> iterator() {
@@ -20,14 +38,21 @@ public class StackImpl implements Stack {
     }
 
     private class IteratorImpl implements Iterator<Object> {
+        Node current = head;
 
         @Override
         public boolean hasNext() {
-            return false;
+            if (size == 0) return false;
+            return tail.next != current;
         }
 
         @Override
         public Object next() {
+            if (hasNext()) {
+                Node temp = current;
+                current = current.next;
+                return temp.value;
+            }
             return null;
         }
 
@@ -35,42 +60,58 @@ public class StackImpl implements Stack {
 
     @Override
     public void push(Object element) {
-        Object[] newarr = new Object[arr.length + 1];
-        for (int i = 0; i < arr.length ; i++) {
-            newarr[i] = arr[i];
+        Node temp = new Node();
+        temp.value = element;
+
+        if ((head != null) && (tail != null)) {
+            tail.next = temp;
+//            temp.next = tail;
+            tail = temp;
+
+        } else {
+            head = tail = temp;
         }
-        newarr[arr.length] = element;
-        arr=newarr;
+        size++;
     }
 
     @Override
     public Object pop() {
-        Object top=arr[arr.length-1];
-        Object [] newarr = new Object [arr.length-1];
-        int newarri=0;
-        for (int i = 0; i < arr.length-1; i++) {
-            newarr[newarri] = arr[i];
-            newarri++;
+        if (size == 0) return null;
+        Node pop = tail;
+        Node temp = head;
+        while(temp != tail){
+            System.out.println(temp.value);
+            if(temp.next == tail){
+                tail = temp;
+                temp.next = null;
+                size --;
+                return pop.value;
+            }
+            temp = temp.next;
         }
-        arr=newarr;
-        return top;
+        return null;
     }
 
     @Override
     public Object top() {
-        return arr[arr.length-1];
+        return tail.value;
     }
 
     @Override
     public String toString() {
-        StringBuilder b=new StringBuilder();
+        if (size == 0) return "[]";
+        StringBuilder b = new StringBuilder();
         b.append("[");
-        for (int i = 0; ; i++) {
-            b.append(arr[i].toString());
-            if (i==arr.length-1){
+        Node node = head;
+        while (true) {
+//            System.out.println("value = " + node.value);
+//            System.out.println("next value = " + node.next.value);
+            b.append(String.valueOf(node.value));
+            if (node == tail) {
                 return b.append("]").toString();
             }
-            b.append(",");
+            b.append(", ");
+            node = node.next;
         }
     }
 
@@ -79,10 +120,17 @@ public class StackImpl implements Stack {
         stack.push("A");
         stack.push("B");
         stack.push("C");
+        for (Object o: stack) {
+            System.out.println(o);
+        }
         System.out.println("stack: "+stack.toString());
-        System.out.println(stack.top());
+        System.out.println("stack.tail.value = "+ stack.tail.value);
+        System.out.println("stack.tail.value = "+ stack.head.value);
+//        System.out.println("stack.tail.value+ = "+ stack.tail.next.nexvalue);
+//        System.out.println(stack.top());
         System.out.println(stack.pop());
-        System.out.println("stack after pop: "+stack.toString());
+        System.out.println("stack after pop: "+ stack.toString());
+        System.out.println(stack.top());
 
     }
 
