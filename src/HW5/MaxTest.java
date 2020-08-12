@@ -36,8 +36,8 @@ public class MaxTest {
                 res[i][j] = Integer.parseInt(sList.get(i)[j]);
             }
         }
-        System.out.println("M = " + M);
-        System.out.println("N = " + N);
+//        System.out.println("M = " + M);
+//        System.out.println("N = " + N);
         return res;
     }
 
@@ -55,7 +55,7 @@ public class MaxTest {
             FileWriter myWriter = new FileWriter(fileName);
             myWriter.write(rands.toString());
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+//            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -79,7 +79,7 @@ public class MaxTest {
 
         public void run(){
             synchronized ("asdf"){
-                System.out.println(Thread.currentThread().getName());
+//                System.out.println(Thread.currentThread().getName());
                 long s1 = System.nanoTime();
 //                System.out.println("Thread#" + Thread.currentThread().getName() + "; s1 = " + s1);
                 maxValues[i] = maxNum1D(res);
@@ -87,7 +87,7 @@ public class MaxTest {
                 long s = s2-s1;
                 T+= s;
 //                System.out.println("Thread#" + Thread.currentThread().getName() + "; s2 = " + s2);
-                System.out.println("Thread#" + Thread.currentThread().getName() + "; Time" + "System.nanoTime() = " + s);
+//                System.out.println("Thread#" + Thread.currentThread().getName() + "; Time" + "System.nanoTime() = " + s);
             }
         }
     }
@@ -102,23 +102,29 @@ public class MaxTest {
         return m;
     }
     public static void main(String[] args) {
-        writeIntMatrix(M,N,"randoms.txt");
-        int[][]result = readMatrix("randoms.txt");
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(result[i][j] + " ");
-            }
-            System.out.print("\n");
-        }
+        for (int count = 0; count < 1; count++){
+            writeIntMatrix(M, N, "randoms.txt");
+//        try {
+//            Thread.sleep(3000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        int[][] result = readMatrix("randoms.txt");
+//        for (int i = 0; i < M; i++) {
+//            for (int j = 0; j < N; j++) {
+//                System.out.print(result[i][j] + " ");
+//            }
+//            System.out.print("\n");
+//        }
         int maxNum2D = 0;
         int maxMany = 0;
 
 
-        for (int count = 0; count <1 ; count++){
-            long start2D = System.nanoTime();
-            maxNum2D = maxNum2D(result);
-            System.out.println("Time for 2d search T = " + (System.nanoTime() - start2D) + "ns");
-            System.out.println("maxOnethread =" + maxNum2D);
+            long start = System.nanoTime();
+            int max = maxNum2D(result);
+            long fin = System.nanoTime();
+            System.out.println("max = " + max + "; time = " + (fin - start));
+//            System.out.println("maxOnethread =" + maxNum2D);
 
 
 //            System.out.println("max1 = " + maxNum1D(result[0]));
@@ -126,26 +132,26 @@ public class MaxTest {
 //            System.out.println("max3 = " + maxNum1D(result[2]));
 //            System.out.println("max4 = " + maxNum1D(result[3]));
 //            System.out.println("System.nanoTime() 2 = " + System.nanoTime());
-            for (int i = 0; i < M; i++) {
-                long ss = System.nanoTime();
-                maxThread[i] = new MaxThread(i, result[i]);
-                long sss = System.nanoTime();
-                System.out.println("time fo " + i + " iter in NEW in main = " + (sss - ss));
-            }
-            long start1D = System.nanoTime();
-            for (int i = 0; i < M; i++) {
+        for (int i = 0; i < M; i++) {
+            long ss = System.nanoTime();
+            maxThread[i] = new MaxThread(i, result[i]);
+            long sss = System.nanoTime();
+//                System.out.println("time fo " + i + " iter in NEW in main = " + (sss - ss));
+        }
+        long start1D = System.nanoTime();
+        for (int i = 0; i < M; i++) {
 //                maxThread[i] = new MaxThread(i, result[i]);
-                long ss = System.nanoTime();
-                maxThread[i].start();
-                long sss = System.nanoTime();
-                System.out.println("time fo " + i + " iter in START in main = " + (sss - ss));
-                try {
-                    maxThread[i].join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            long ss = System.nanoTime();
+            maxThread[i].start();
+            long sss = System.nanoTime();
+//                System.out.println("time fo " + i + " iter in START in main = " + (sss - ss));
+//                try {
+//                    maxThread[i].join();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
 //                maxThread[i].setName(String.valueOf(i));
-            }
+        }
 //            for (int i = 0; i < M; i++) {
 //                try {
 //                    maxThread[i].join();
@@ -153,17 +159,17 @@ public class MaxTest {
 //                    e.printStackTrace();
 //                }
 //            }
-//            for (int x :
-//                    maxValues) {
-//                System.out.println("max x = " + x);
-//            }
-
-            System.out.println("Time for 1d search T = " + (System.nanoTime() - start1D) + "ns");
-            maxMany = maxNum1D(maxValues);
-            System.out.println("maxNum1D = " + maxMany);
-            System.out.println(maxNum2D == maxMany);
+            for (int x :
+                    maxValues) {
+                System.out.println("max x = " + x);
+            }
+        long fin1D = System.nanoTime();
+        System.out.println("Time for 1d search T = " + (fin1D - start1D) + "ns");
+        maxMany = maxNum1D(maxValues);
+        System.out.println("maxNum1D = " + maxMany);
+        System.out.println(max == maxMany);
             System.out.println("T = " + T);
-        }
 
+    }
     }
 }
